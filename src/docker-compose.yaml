@@ -1,0 +1,17 @@
+version:'2'
+services:
+
+  tracker:
+    image: ruandao/fastdfs:5.08
+    network_mode: host
+    volumes:
+      - /data/fastdfs/fdfs_conf:/home/fastdfs/fastdfs-5.08/conf/
+    command: bundle exec fdfs_trackerd /home/fastdfs/fastdfs-5.08/conf/tracker.conf
+
+  storage:
+    image: ruandao/fastdfs:5.08
+    network_mode: host
+    volumes:
+      - /data/fastdfs/fdfs_conf:/home/fastdfs/fastdfs-5.08/conf/
+      - /data/fastdfs/etc_conf:/etc/fdfs
+    command: bundle exec fdfs_storaged /home/fastdfs/fastdfs-5.08/conf/storage.conf
